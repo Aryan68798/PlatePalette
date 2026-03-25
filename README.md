@@ -12,15 +12,15 @@ This project is being developed as part of the Web Application Programming miles
 
 ## API Used
 
-This project uses **TheMealDB API**, a free public API that provides meal and recipe data.
+This project uses **DummyJSON Recipies**, a free public API that provides meal and recipe data.
 
 API Documentation:
-https://www.themealdb.com/api.php
+https://dummyjson.com/recipes
 
 Example API Endpoint:
 
 ```
-https://www.themealdb.com/api/json/v1/1/search.php?s=chicken
+https://dummyjson.com/recipes/search?q=Margherita
 ```
 
 The API provides information such as:
