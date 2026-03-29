@@ -1,0 +1,240 @@
+const API = 'https://dummyjson.com/recipes?limit=50';
+let allRecipes = [];
+let activeMeal = 'all';
+let searchQ = '';
+let toastTimer;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+async function fetchRecipes() {
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    allRecipes = data.recipes;
+    document.getElementById('exploreLoading').classList.add('hidden');
+    document.getElementById('exploreContent').classList.remove('hidden');
+    renderAll();
+  } catch (e) {
+    document.getElementById('exploreLoading').innerHTML = '<p style="color:#e53">Failed to load recipes. Check your connection.</p>';
+  }
+}
+
+function renderAll() {
+  renderSection('featuredRow',  allRecipes.slice().sort((a,b) => b.rating - a.rating).slice(0, 6));
+  renderSection('breakfastRow', byMeal('Breakfast').slice(0, 5));
+  renderSection('lunchRow',     byMeal('Lunch').slice(0, 5));
+  renderSection('dinnerRow',    byMeal('Dinner').slice(0, 5));
+  renderSection('dessertRow',   byMeal('Dessert').slice(0, 5));
+  renderFilterGrid();
+}
+
+function byMeal(type) {
+  return allRecipes.filter(r => (r.mealType || []).includes(type));
+}
+
+function renderSection(id, recipes) {
+  const el = document.getElementById(id);
+  if (!recipes.length) {
+    el.closest('.exp-section').style.display = 'none';
+    return;
+  }
+  el.innerHTML = recipes.map(r => cardHTML(r)).join('');
+  bindCardClicks(el);
+}
+
+function renderFilterGrid() {
+  const grid = document.getElementById('filterGrid');
+  const empty = document.getElementById('emptySearch');
+  const title = document.getElementById('filterSectionTitle');
+  const badge = document.getElementById('filterCount');
+
+  let list = allRecipes;
+
+  if (activeMeal !== 'all') {
+    list = list.filter(r => (r.mealType || []).includes(activeMeal));
+  }
+  if (searchQ) {
+    list = list.filter(r =>
+      r.name.toLowerCase().includes(searchQ) ||
+      r.cuisine.toLowerCase().includes(searchQ) ||
+      (r.tags || []).some(t => t.toLowerCase().includes(searchQ)) ||
+      (r.ingredients || []).some(i => i.toLowerCase().includes(searchQ))
+    );
+  }
+
+  const label = activeMeal !== 'all' ? activeMeal.toUpperCase() : 'ALL';
+  title.textContent = `${label} RECIPES`;
+  badge.textContent = `${list.length} found`;
+
+  if (!list.length) {
+    grid.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+  grid.innerHTML = list.map(r => cardHTML(r)).join('');
+  bindCardClicks(grid);
+
+  const sectionFilter = document.getElementById('sectionFilter');
+  if (activeMeal !== 'all' || searchQ) {
+    sectionFilter.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function cardHTML(r) {
+  const stars = renderStars(r.rating);
+  const time = r.prepTimeMinutes + r.cookTimeMinutes;
+  const diff = r.difficulty || 'Easy';
+  const diffClass = diff.toLowerCase();
+  return `
+    <article class="exp-card" data-id="${r.id}">
+      <div class="exp-card-img">
+        <img src="${r.image}" alt="${r.name}" loading="lazy" />
+        <span class="exp-diff diff-${diffClass}">${diff}</span>
+        <span class="exp-meal">${(r.mealType||[]).join(' · ')}</span>
+      </div>
+      <div class="exp-card-body">
+        <div class="exp-cuisine">${r.cuisine}</div>
+        <h3 class="exp-name">${r.name}</h3>
+        <div class="exp-card-meta">
+          <span class="exp-stars">${stars} <strong>${r.rating}</strong></span>
+          <span class="exp-time">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+            ${time} min
+          </span>
+        </div>
+        <div class="exp-card-footer">
+          <span class="exp-cal">🔥 ${r.caloriesPerServing} cal</span>
+          <button class="exp-view-btn">View →</button>
+        </div>
+      </div>
+    </article>`;
+}
+
+function renderStars(rating) {
+  let s = '';
+  for (let i = 0; i < 5; i++) {
+    if (i < Math.floor(rating)) s += '<span class="s-full">★</span>';
+    else if (i === Math.floor(rating) && rating % 1 >= 0.5) s += '<span class="s-half">★</span>';
+    else s += '<span class="s-empty">☆</span>';
+  }
+  return s;
+}
+
+function bindCardClicks(container) {
+  container.querySelectorAll('.exp-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = parseInt(card.dataset.id);
+      window.location.href = `recipe.html?id=${id}`;
+    });
+  });
+}
+
+function openModal(r) {
+  if (!r) return;
+  document.getElementById('expModalImg').src = r.image;
+  document.getElementById('expModalImg').alt = r.name;
+  document.getElementById('expModalTitle').textContent = r.name.toUpperCase();
+
+  document.getElementById('expModalTags').innerHTML =
+    [...(r.tags||[]), r.cuisine].map(t => `<span class="em-tag">${t}</span>`).join('');
+
+  document.getElementById('expModalMeta').innerHTML = `
+    <span>${renderStars(r.rating)} <strong>${r.rating}</strong></span>
+    <span>⏱ ${r.prepTimeMinutes + r.cookTimeMinutes} min</span>
+    <span>🍽 ${r.servings} servings</span>
+    <span>📊 ${r.difficulty}</span>`;
+
+  document.getElementById('expModalIng').innerHTML =
+    r.ingredients.map(i => `<li><span class="em-dot"></span>${i}</li>`).join('');
+
+  document.getElementById('expModalInstr').innerHTML =
+    r.instructions.map(s => `<li>${s}</li>`).join('');
+
+  document.getElementById('expModalFooter').innerHTML = `
+    <div class="em-chip">🔥 ${r.caloriesPerServing} cal/serving</div>
+    <div class="em-chip">⏳ Prep: ${r.prepTimeMinutes} min</div>
+    <div class="em-chip">🍳 Cook: ${r.cookTimeMinutes} min</div>
+    <div class="em-chip">🌍 ${r.cuisine}</div>
+    <div class="em-chip">${(r.mealType||[]).join(', ')}</div>`;
+
+  const overlay = document.getElementById('expModalOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('expModal').classList.add('open'), 10);
+}
+
+function closeModal() {
+  document.getElementById('expModal').classList.remove('open');
+  setTimeout(() => {
+    document.getElementById('expModalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+function handleSearch(val) {
+  searchQ = val.toLowerCase().trim();
+  document.getElementById('globalSearch').value = val;
+  document.getElementById('heroSearch').value = val;
+  renderFilterGrid();
+}
+
+document.getElementById('expModalClose').addEventListener('click', closeModal);
+document.getElementById('expModalOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+document.querySelectorAll('.cat-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeMeal = btn.dataset.meal;
+    renderFilterGrid();
+  });
+});
+
+document.querySelectorAll('.exp-view-all-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeMeal = btn.dataset.meal;
+    document.querySelectorAll('.cat-item').forEach(b => {
+      b.classList.toggle('active', b.dataset.meal === activeMeal);
+    });
+    renderFilterGrid();
+  });
+});
+
+document.getElementById('globalSearch').addEventListener('input', e => handleSearch(e.target.value));
+document.getElementById('heroSearch').addEventListener('input', e => handleSearch(e.target.value));
+
+document.getElementById('clearSearchBtn').addEventListener('click', () => {
+  handleSearch('');
+});
+
+
+
+document.getElementById('goProBtn').addEventListener('click', () => {
+  showToast('Opening Pro plans... 💎');
+});
+
+document.getElementById('newsletterForm').addEventListener('submit', e => {
+  e.preventDefault();
+  showToast("You're subscribed! Welcome to the vault 🎉");
+  e.target.reset();
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar') && document.querySelector('.navbar')
+    .classList.toggle('scrolled', window.scrollY > 60);
+});
+
+fetchRecipes();
