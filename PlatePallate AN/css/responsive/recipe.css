@@ -1,0 +1,7 @@
+/* --- recipe.css --- */
+@media (max-width: 768px) {
+  .recipe-header { grid-template-columns: 1fr; }
+  .recipe-body   { grid-template-columns: 1fr; }
+  .recipe-footer { padding: 20px 16px; }
+  .hints-row     { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,17 @@
+/* --- landing.css --- */
+@media (max-width: 900px) {
+  .nb-bento { grid-template-columns: 1fr; }
+  .nb-card-full { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .nb-hiw-steps { grid-template-columns: 1fr; gap: 48px; }
+  .nb-sub-form { flex-direction: column; height: auto; }
+  .nb-sub-form input { height: 48px; }
+  .nb-sub-form button { padding: 16px; }
+}
+@media (max-width: 600px) {
+  .nb-nav { padding: 16px 20px; flex-direction: column; gap: 16px; }
+  .nb-float-left, .nb-float-right { display: none; }
+  .nb-hero { padding: 80px 20px; }
+  .nb-grid-section, .nb-how-it-works, .nb-subscribe { padding: 48px 20px; }
+  .nb-sub-box { padding: 40px 20px; }
+  .nb-footer { flex-direction: column; align-items: flex-start; }
+}

@@ -1,0 +1,15 @@
+/* --- styles.css --- */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .vault-title { font-size: 42px; }
+  .featured-row { grid-template-columns: 1fr; }
+  .side-stack { flex-direction: row; overflow-x: auto; }
+  .small-card { min-width: 200px; }
+  .collection-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-card { grid-template-columns: 1fr; }
+  .hero-img-wrap { height: 180px; }
+}
+@media (max-width: 520px) {
+  .collection-grid { grid-template-columns: 1fr; }
+  .main-content { padding: 20px 16px; }
+}

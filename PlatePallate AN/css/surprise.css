@@ -1,0 +1,50 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fff;
+  border: var(--border);
+  padding: 3rem;
+  box-shadow: 8px 8px 0 var(--black);
+  border-radius: 8px;
+}
+
+.spatula {
+  font-size: 4rem;
+  animation: flip 1.5s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes flip {
+  0% { transform: scaleX(1) rotate(0deg); }
+  50% { transform: scaleX(-1) rotate(180deg); }
+  100% { transform: scaleX(1) rotate(360deg); }
+}
+
+.cooking-text {
+  margin-top: 1.5rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: var(--black);
+}
+
+.dots {
+  display: inline-block;
+  width: 30px;
+  text-align: left;
+}
