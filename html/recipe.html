@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlatePalette — Teriyaki Chicken</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/responsive/styles.css" />
+    <link rel="stylesheet" href="../css/recipe.css" />
+    <link rel="stylesheet" href="../css/responsive/recipe.css" />
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">PLATE<span>PALETTE</span></a>
+        <ul class="nav-links">
+            <li><a href="explore.html">Explore</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="search-box">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input type="text" placeholder="Search recipes…" />
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="app-layout">
+
+
+        <main class="main-content recipe-main">
+
+            <!-- RECIPE HEADER -->
+            <div id="recipeLoader"
+                style="position: absolute; top:0; left:0; right:0; bottom:0; background: var(--color-bg); z-index: 50; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-family: 'Bebas Neue';">
+                COOKING...</div>
+            <div class="recipe-header" style="opacity: 0; transition: opacity 0.3s;" id="recipeHeader">
+                <div class="recipe-img-col">
+                    <span class="chefs-choice-badge">👨‍🍳 CHEF'S CHOICE</span>
+                    <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=500&q=80"
+                        alt="Teriyaki Chicken" class="recipe-hero-img" />
+                </div>
+                <div class="recipe-info-col">
+                    <h1 class="recipe-title">TERIYAKI<br>CHICKEN</h1>
+                    <div class="recipe-tags-row">
+                        <span class="rtag rtag-green">QUICK MEAL</span>
+                        <span class="rtag rtag-orange">CARNIVORE FUSION</span>
+                    </div>
+                    <div class="time-boxes">
+                        <div class="time-box">
+                            <div class="time-val">15 MIN</div>
+                            <div class="time-label">PREP</div>
+                        </div>
+                        <div class="time-box">
+                            <div class="time-val">20 MIN</div>
+                            <div class="time-label">COOK</div>
+                        </div>
+                    </div>
+                    <button class="watch-btn" id="watchBtn">▶ WATCH TUTORIAL</button>
+                    <div class="recipe-actions">
+                        <button class="action-btn" id="bookmarkBtn" title="Save">🤍</button>
+                        <button class="action-btn" id="shareBtn" title="Share">↗</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="recipe-body" style="opacity: 0; transition: opacity 0.3s;" id="recipeBody">
+
+
+                <div class="ingredients-col">
+
+                    <div class="recipe-section-card">
+                        <h3 class="recipe-section-title">🧺 INGREDIENTS</h3>
+                        <ul class="ingredients-list" id="ingredientsList">
+                            <li><label><input type="checkbox" /> <span>500g Chicken Thighs</span></label></li>
+                            <li><label><input type="checkbox" /> <span>1/2 cup Soy Sauce</span></label></li>
+                            <li><label><input type="checkbox" /> <span>1/4 cup Mirin</span></label></li>
+                            <li><label><input type="checkbox" /> <span>2 tbsp Brown Sugar</span></label></li>
+                            <li><label><input type="checkbox" /> <span>1 tbsp Grated Ginger</span></label></li>
+                            <li><label><input type="checkbox" /> <span>2 Garlic Cloves, minced</span></label></li>
+                            <li><label><input type="checkbox" /> <span>Sesame Seeds &amp; Scallions</span></label></li>
+                        </ul>
+                    </div>
+
+                    <div class="recipe-section-card nutrition-card">
+                        <h3 class="recipe-section-title">📊 NUTRITIONAL INFO</h3>
+                        <div class="nutrition-highlight">
+                            <div class="cal-display">
+                                <div class="cal-num">520</div>
+                                <div class="cal-label">KCAL</div>
+                            </div>
+                        </div>
+                        <div class="nutrition-row"><span>PROTEIN</span><span class="nu-val">63g</span></div>
+                        <div class="nutrition-row"><span>CARBS</span><span class="nu-val">19g</span></div>
+                        <div class="nutrition-row"><span>FAT</span><span class="nu-val">24g</span></div>
+                    </div>
+
+                </div>
+
+
+                <div class="instructions-col">
+                    <div class="instructions-header">
+                        <div class="overdue-badge">OVERDUE</div>
+                        <h2 class="instructions-title">INSTRUCTIONS</h2>
+                    </div>
+
+                    <div class="steps-list">
+                        <div class="step-card" data-step="1">
+                            <div class="step-num">01</div>
+                            <div class="step-body">
+                                <h4>PREPARE THE GLAZE</h4>
+                                <p>In a small bowl, whisk together the soy sauce, mirin, brown sugar, ginger, and
+                                    garlic. Ensure the
+                                    sugar is fully dissolved. If you prefer a thicker glaze, add 1 tsp of cornstarch to
+                                    the mix.</p>
+                            </div>
+                        </div>
+                        <div class="step-card" data-step="2">
+                            <div class="step-num">02</div>
+                            <div class="step-body">
+                                <h4>SEAR THE CHICKEN</h4>
+                                <p>Heat a large skillet over medium-high heat with a splash of oil. Pat the chicken
+                                    thighs dry and sear
+                                    them skin-side down (if applicable) for 5–7 minutes until golden brown and crispy.
+                                    Flip and cook for
+                                    another 4 minutes.</p>
+                            </div>
+                        </div>
+                        <div class="step-card" data-step="3">
+                            <div class="step-num">03</div>
+                            <div class="step-body">
+                                <h4>DEGLAZE &amp; SIMMER</h4>
+                                <p>Pour the prepared teriyaki mixture over the chicken. Bring to a simmer and let the
+                                    sauce reduce and
+                                    thicken until it coats the back of a spoon. Baste the chicken frequently with the
+                                    bubbling sauce.</p>
+                            </div>
+                        </div>
+                        <div class="step-card" data-step="4">
+                            <div class="step-num">04</div>
+                            <div class="step-body">
+                                <h4>FINISH &amp; SERVE</h4>
+                                <p>Slice the chicken into thick strips. Serve over a bed of fluffy jasmine rice. Drizzle
+                                    with the
+                                    remaining pan sauce and garnish generously with toasted sesame seeds and thinly
+                                    sliced green onions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PRO TIP + PAIR WITH -->
+                    <div class="hints-row">
+                        <div class="hint-card">
+                            <div class="hint-icon">🔥</div>
+                            <h4>PRO TIP</h4>
+                            <p>For the best flavor, marinate the chicken in half of the sauce for at least 30 minutes
+                                before cooking.
+                            </p>
+                        </div>
+                        <div class="hint-card hint-green">
+                            <div class="hint-icon">🍽</div>
+                            <h4>PAIR WITH</h4>
+                            <p>Steamed broccoli, bok choy, or a fresh smashed cucumber salad with chili oil.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+
+    <footer class="recipe-footer">
+        <div class="footer-logo">PLATEPALETTE</div>
+        <div class="footer-links">
+            <a href="#">PRIVACY</a>
+            <a href="#">TERMS</a>
+            <a href="#">SUPPORT</a>
+            <a href="#">COOKBOOK</a>
+        </div>
+        <div class="footer-copy">© 2025 FLAVOR MATCHUP STUDIOS</div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="../js/recipe.js"></script>
+    <a href="submit.html" class="fab-plus" title="Submit Recipe">+</a>
+    <a href="surprise.html" class="nav-surprise-btn">Surprise Me 🎲</a>
+</body>
+
+</html>
