@@ -506,3 +506,28 @@ a {
   font-weight: 700;
   color: #b8f62f;
 }
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+  background: transparent; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--black); padding: 4px;
+}
+.theme-toggle:hover { color: var(--orange); }
+.hidden { display: none !important; }
+
+/* --- Dark Mode Overrides for Landing Page --- */
+body.dark-mode {
+  --cream: #18191a;
+  --dark: #e4e6eb;
+  --black: #e4e6eb;
+  --white: #242526;
+  background: var(--cream);
+  color: var(--black);
+}
+
+body.dark-mode .nb-hero { background: radial-gradient(circle at 50% 60%, #242526 0%, var(--cream) 60%); }
+body.dark-mode .nb-outline { text-shadow: -2px -2px 0 var(--orange), 2px -2px 0 var(--orange), -2px 2px 0 var(--orange), 2px 2px 0 var(--orange), 4px 4px 0 var(--orange); }
+body.dark-mode .nb-btn { color: #111; }
+body.dark-mode .nb-btn.nb-white { color: #e4e6eb; }
+body.dark-mode .nb-btn.nb-dark { background: #e4e6eb; color: #111; }

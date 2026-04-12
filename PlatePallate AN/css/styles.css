@@ -1025,6 +1025,15 @@ body {
   transform: translateY(0);
 }
 
+/* --- Theme Toggle --- */
+.theme-toggle {
+  background: transparent; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--black); padding: 4px;
+}
+.theme-toggle:hover { color: var(--orange); }
+.hidden { display: none !important; }
+
 /* --- Dark Mode Overrides --- */
 body.dark-mode {
   --cream: #18191a;
@@ -1112,4 +1121,17 @@ body.dark-mode .exp-modal {
 
 body.dark-mode .modal {
   background: var(--cream2);
+}
+
+/* Fix specific colors for exp-card elements and text */
+body.dark-mode .exp-view-btn {
+  color: var(--cream);
+}
+
+body.dark-mode .exp-time {
+  color: #ccc;
+}
+
+body.dark-mode .exp-meal {
+  color: var(--cream);
 }
