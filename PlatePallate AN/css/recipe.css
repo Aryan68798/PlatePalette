@@ -189,4 +189,15 @@
 .footer-links a:hover { color: var(--orange); }
 .footer-copy { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: .04em; }
 
+/* --- Dark Mode Overrides --- */
+body.dark-mode .time-box,
+body.dark-mode .recipe-section-card,
+body.dark-mode .step-card {
+  background: var(--cream2);
+}
 
+body.dark-mode .time-label,
+body.dark-mode .cal-label,
+body.dark-mode .step-body p {
+  color: #ccc;
+}

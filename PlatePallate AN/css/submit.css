@@ -129,3 +129,13 @@
   text-transform: uppercase;
   text-decoration: none;
 }
+
+/* --- Dark Mode Overrides --- */
+body.dark-mode .submit-form {
+  background: var(--cream2);
+}
+
+body.dark-mode .submit-header p,
+body.dark-mode .success-msg p {
+  color: #ccc;
+}

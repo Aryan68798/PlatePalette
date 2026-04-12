@@ -1,194 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PlatePalette — Explore</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/responsive/styles.css" />
   <link rel="stylesheet" href="../css/explore.css" />
   <link rel="stylesheet" href="../css/responsive/explore.css" />
 </head>
+
 <body>
 
-<nav class="navbar">
-  <a href="index.html" class="logo">PLATE<span>PALETTE</span></a>
-  <ul class="nav-links">
-  </ul>
-  <div class="nav-right">
-    <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
-      <svg class="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      <svg class="sun-icon hidden" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-    </button>
-    <div class="search-box">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input id="globalSearch" type="text" placeholder="Search recipes…" autocomplete="off" />
-    </div>
+  <nav class="navbar">
+    <a href="index.html" class="logo">PLATE<span>PALETTE</span></a>
+    <ul class="nav-links">
+    </ul>
+    <div class="nav-right">
+      <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+        <svg class="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="sun-icon hidden" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+      <div class="search-box">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input id="globalSearch" type="text" placeholder="Search recipes…" autocomplete="off" />
+      </div>
 
+    </div>
+  </nav>
+
+  <div class="app-layout">
+
+
+
+    <main class="main-content">
+
+      <section class="hero-section">
+        <div class="hero-left">
+          <div class="taste-badge">🌍 TASTE THE WORLD</div>
+          <h1 class="hero-headline">GLOBAL<br><span>FLAVORS</span><br>AT YOUR<br>FINGERTIPS</h1>
+          <div class="hero-search-inline">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input id="heroSearch" type="text" placeholder="What are you craving?" autocomplete="off" />
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-img-grid">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=240&q=80" alt="Burger" />
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=240&q=80" alt="Salad" />
+            <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=240&q=80" alt="Sushi" />
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=240&q=80" alt="Food" />
+          </div>
+
+        </div>
+      </section>
+
+      <div class="explore-loading" id="exploreLoading">
+        <div class="exp-spinner"></div>
+        <span>Loading recipes…</span>
+      </div>
+
+      <div id="exploreContent" class="hidden">
+
+        <section class="exp-section" id="sectionFeatured">
+          <div class="exp-section-header">
+            <h2 class="exp-section-title">⭐ FEATURED TODAY</h2>
+            <a href="#sectionFilter" class="exp-view-all">View All →</a>
+          </div>
+          <div class="exp-row" id="featuredRow"></div>
+        </section>
+
+        <section class="exp-section" id="sectionBreakfast">
+          <div class="exp-section-header">
+            <h2 class="exp-section-title">☀️ BREAKFAST</h2>
+            <button class="exp-view-all-btn" data-meal="Breakfast">See More →</button>
+          </div>
+          <div class="exp-row" id="breakfastRow"></div>
+        </section>
+
+        <section class="exp-section" id="sectionLunch">
+          <div class="exp-section-header">
+            <h2 class="exp-section-title">🥗 LUNCH</h2>
+            <button class="exp-view-all-btn" data-meal="Lunch">See More →</button>
+          </div>
+          <div class="exp-row" id="lunchRow"></div>
+        </section>
+
+        <section class="exp-section" id="sectionDinner">
+          <div class="exp-section-header">
+            <h2 class="exp-section-title">🌙 DINNER</h2>
+            <button class="exp-view-all-btn" data-meal="Dinner">See More →</button>
+          </div>
+          <div class="exp-row" id="dinnerRow"></div>
+        </section>
+
+        <section class="exp-section" id="sectionDessert">
+          <div class="exp-section-header">
+            <h2 class="exp-section-title">🍩 DESSERT</h2>
+            <button class="exp-view-all-btn" data-meal="Dessert">See More →</button>
+          </div>
+          <div class="exp-row" id="dessertRow"></div>
+        </section>
+
+        <section class="exp-section" id="sectionFilter">
+          <div class="exp-section-header flex-header">
+            <div class="title-wrap">
+              <h2 class="exp-section-title" id="filterSectionTitle">ALL RECIPES</h2>
+              <span class="exp-count-badge" id="filterCount"></span>
+            </div>
+            <div class="filter-controls">
+              <select id="sortSelect" class="styled-select">
+                <option value="none">Sort By Dfault</option>
+                <option value="alpha_asc">Name (A-Z)</option>
+                <option value="alpha_desc">Name (Z-A)</option>
+                <option value="rating_desc">Highest Rated</option>
+                <option value="rating_asc">Lowest Rated</option>
+                <option value="time_asc">Quickest</option>
+              </select>
+            </div>
+          </div>
+          <div class="exp-grid" id="filterGrid"></div>
+          <div class="empty-search hidden" id="emptySearch">
+            <div style="font-size:40px">🔍</div>
+            <p>No recipes found. Try a different search.</p>
+            <button class="btn-clear-search" id="clearSearchBtn">Clear Search</button>
+          </div>
+        </section>
+
+      </div>
+
+
+
+      <div class="bottom-section">
+        <div class="newsletter-card">
+          <h2>DON'T MISS<br>A SINGLE BITE.</h2>
+          <p>Join 50,000+ foodies getting weekly secret recipes and chef tips directly in their inbox.</p>
+          <form id="newsletterForm">
+            <div class="nl-input-row">
+              <input type="email" placeholder="email@address.com" />
+              <button type="submit">JOIN NOW</button>
+            </div>
+          </form>
+        </div>
+        <div class="premium-card">
+          <div class="premium-icon">☆</div>
+          <h3>PREMIUM MEMBER?</h3>
+          <p>Unlock nutrition tracking, meal planning, and ad-free browsing today.</p>
+          <button class="go-pro-btn" id="goProBtn">GO PRO</button>
+        </div>
+      </div>
+
+    </main>
   </div>
-</nav>
 
-<div class="app-layout">
-
-
-
-  <main class="main-content">
-
-    <section class="hero-section">
-      <div class="hero-left">
-        <div class="taste-badge">🌍 TASTE THE WORLD</div>
-        <h1 class="hero-headline">GLOBAL<br><span>FLAVORS</span><br>AT YOUR<br>FINGERTIPS</h1>
-        <div class="hero-search-inline">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-          <input id="heroSearch" type="text" placeholder="What are you craving?" autocomplete="off" />
-        </div>
+  <div class="exp-modal-overlay" id="expModalOverlay">
+    <div class="exp-modal" id="expModal">
+      <button class="exp-modal-close" id="expModalClose">✕</button>
+      <div class="exp-modal-img-wrap">
+        <img id="expModalImg" src="" alt="" />
       </div>
-      <div class="hero-right">
-        <div class="hero-img-grid">
-          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=240&q=80" alt="Burger" />
-          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=240&q=80" alt="Salad" />
-          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=240&q=80" alt="Sushi" />
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=240&q=80" alt="Food" />
-        </div>
-
-      </div>
-    </section>
-
-    <div class="explore-loading" id="exploreLoading">
-      <div class="exp-spinner"></div>
-      <span>Loading recipes…</span>
-    </div>
-
-    <div id="exploreContent" class="hidden">
-
-      <section class="exp-section" id="sectionFeatured">
-        <div class="exp-section-header">
-          <h2 class="exp-section-title">⭐ FEATURED TODAY</h2>
-          <a href="#sectionFilter" class="exp-view-all">View All →</a>
-        </div>
-        <div class="exp-row" id="featuredRow"></div>
-      </section>
-
-      <section class="exp-section" id="sectionBreakfast">
-        <div class="exp-section-header">
-          <h2 class="exp-section-title">☀️ BREAKFAST</h2>
-          <button class="exp-view-all-btn" data-meal="Breakfast">See More →</button>
-        </div>
-        <div class="exp-row" id="breakfastRow"></div>
-      </section>
-
-      <section class="exp-section" id="sectionLunch">
-        <div class="exp-section-header">
-          <h2 class="exp-section-title">🥗 LUNCH</h2>
-          <button class="exp-view-all-btn" data-meal="Lunch">See More →</button>
-        </div>
-        <div class="exp-row" id="lunchRow"></div>
-      </section>
-
-      <section class="exp-section" id="sectionDinner">
-        <div class="exp-section-header">
-          <h2 class="exp-section-title">🌙 DINNER</h2>
-          <button class="exp-view-all-btn" data-meal="Dinner">See More →</button>
-        </div>
-        <div class="exp-row" id="dinnerRow"></div>
-      </section>
-
-      <section class="exp-section" id="sectionDessert">
-        <div class="exp-section-header">
-          <h2 class="exp-section-title">🍩 DESSERT</h2>
-          <button class="exp-view-all-btn" data-meal="Dessert">See More →</button>
-        </div>
-        <div class="exp-row" id="dessertRow"></div>
-      </section>
-
-      <section class="exp-section" id="sectionFilter">
-        <div class="exp-section-header flex-header">
-          <div class="title-wrap">
-            <h2 class="exp-section-title" id="filterSectionTitle">ALL RECIPES</h2>
-            <span class="exp-count-badge" id="filterCount"></span>
+      <div class="exp-modal-body">
+        <div class="exp-modal-tags" id="expModalTags"></div>
+        <h2 class="exp-modal-title" id="expModalTitle"></h2>
+        <div class="exp-modal-meta" id="expModalMeta"></div>
+        <div class="exp-modal-cols">
+          <div>
+            <h4 class="exp-modal-col-title">🥄 Ingredients</h4>
+            <ul class="exp-ing-list" id="expModalIng"></ul>
           </div>
-          <div class="filter-controls">
-            <select id="sortSelect" class="styled-select">
-              <option value="none">Sort By Dfault</option>
-              <option value="alpha_asc">Name (A-Z)</option>
-              <option value="alpha_desc">Name (Z-A)</option>
-              <option value="rating_desc">Highest Rated</option>
-              <option value="rating_asc">Lowest Rated</option>
-              <option value="time_asc">Quickest</option>
-            </select>
+          <div>
+            <h4 class="exp-modal-col-title">👨‍🍳 Instructions</h4>
+            <ol class="exp-instr-list" id="expModalInstr"></ol>
           </div>
         </div>
-        <div class="exp-grid" id="filterGrid"></div>
-        <div class="empty-search hidden" id="emptySearch">
-          <div style="font-size:40px">🔍</div>
-          <p>No recipes found. Try a different search.</p>
-          <button class="btn-clear-search" id="clearSearchBtn">Clear Search</button>
-        </div>
-      </section>
-
-    </div>
-
-
-
-    <div class="bottom-section">
-      <div class="newsletter-card">
-        <h2>DON'T MISS<br>A SINGLE BITE.</h2>
-        <p>Join 50,000+ foodies getting weekly secret recipes and chef tips directly in their inbox.</p>
-        <form id="newsletterForm">
-          <div class="nl-input-row">
-            <input type="email" placeholder="email@address.com" />
-            <button type="submit">JOIN NOW</button>
-          </div>
-        </form>
+        <div class="exp-modal-footer-meta" id="expModalFooter"></div>
       </div>
-      <div class="premium-card">
-        <div class="premium-icon">☆</div>
-        <h3>PREMIUM MEMBER?</h3>
-        <p>Unlock nutrition tracking, meal planning, and ad-free browsing today.</p>
-        <button class="go-pro-btn" id="goProBtn">GO PRO</button>
-      </div>
-    </div>
-
-  </main>
-</div>
-
-<div class="exp-modal-overlay" id="expModalOverlay">
-  <div class="exp-modal" id="expModal">
-    <button class="exp-modal-close" id="expModalClose">✕</button>
-    <div class="exp-modal-img-wrap">
-      <img id="expModalImg" src="" alt="" />
-    </div>
-    <div class="exp-modal-body">
-      <div class="exp-modal-tags" id="expModalTags"></div>
-      <h2 class="exp-modal-title" id="expModalTitle"></h2>
-      <div class="exp-modal-meta" id="expModalMeta"></div>
-      <div class="exp-modal-cols">
-        <div>
-          <h4 class="exp-modal-col-title">🥄 Ingredients</h4>
-          <ul class="exp-ing-list" id="expModalIng"></ul>
-        </div>
-        <div>
-          <h4 class="exp-modal-col-title">👨‍🍳 Instructions</h4>
-          <ol class="exp-instr-list" id="expModalInstr"></ol>
-        </div>
-      </div>
-      <div class="exp-modal-footer-meta" id="expModalFooter"></div>
     </div>
   </div>
-</div>
 
-<div class="toast" id="toast"></div>
+  <div class="toast" id="toast"></div>
 
-<script src="../js/explore.js"></script>
-<script src="../js/theme.js"></script>
-<a href="submit.html" class="fab-plus" title="Submit Recipe">+</a>
-<a href="surprise.html" class="nav-surprise-btn">Surprise Me 🎲</a>
+  <script src="../js/explore.js"></script>
+  <script src="../js/theme.js"></script>
+  <a href="submit.html" class="fab-plus" title="Submit Recipe">+</a>
+  <a href="surprise.html" class="nav-surprise-btn">Surprise Me 🎲</a>
 </body>
+
 </html>
