@@ -3,6 +3,8 @@ let allRecipes = [];
 let activeMeal = 'all';
 let searchQ = '';
 let toastTimer;
+let sortState = 'none';
+let likedRecipes = new Set(JSON.parse(localStorage.getItem('platePaletteLikes') || '[]'));
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -69,6 +71,18 @@ function renderFilterGrid() {
     );
   }
 
+  if (sortState === 'alpha_asc') {
+    list = list.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortState === 'alpha_desc') {
+    list = list.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortState === 'rating_desc') {
+    list = list.sort((a, b) => b.rating - a.rating);
+  } else if (sortState === 'rating_asc') {
+    list = list.sort((a, b) => a.rating - b.rating);
+  } else if (sortState === 'time_asc') {
+    list = list.sort((a, b) => (a.prepTimeMinutes + a.cookTimeMinutes) - (b.prepTimeMinutes + b.cookTimeMinutes));
+  }
+
   const label = activeMeal !== 'all' ? activeMeal.toUpperCase() : 'ALL';
   title.textContent = `${label} RECIPES`;
   badge.textContent = `${list.length} found`;
@@ -93,8 +107,15 @@ function cardHTML(r) {
   const time = r.prepTimeMinutes + r.cookTimeMinutes;
   const diff = r.difficulty || 'Easy';
   const diffClass = diff.toLowerCase();
+  const isLiked = likedRecipes.has(r.id.toString());
+  const favClass = isLiked ? 'liked' : '';
   return `
     <article class="exp-card" data-id="${r.id}">
+      <div class="exp-like-btn ${favClass}" data-like-id="${r.id}">
+        <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
       <div class="exp-card-img">
         <img src="${r.image}" alt="${r.name}" loading="lazy" />
         <span class="exp-diff diff-${diffClass}">${diff}</span>
@@ -121,17 +142,32 @@ function cardHTML(r) {
 }
 
 function renderStars(rating) {
-  let s = '';
-  for (let i = 0; i < 5; i++) {
-    if (i < Math.floor(rating)) s += '<span class="s-full">★</span>';
-    else if (i === Math.floor(rating) && rating % 1 >= 0.5) s += '<span class="s-half">★</span>';
-    else s += '<span class="s-empty">☆</span>';
-  }
-  return s;
+  return Array.from({ length: 5 }).map((_, i) => {
+    if (i < Math.floor(rating)) return '<span class="s-full">★</span>';
+    if (i === Math.floor(rating) && rating % 1 >= 0.5) return '<span class="s-half">★</span>';
+    return '<span class="s-empty">☆</span>';
+  }).join('');
 }
 
 function bindCardClicks(container) {
-  container.querySelectorAll('.exp-card').forEach(card => {
+  Array.from(container.querySelectorAll('.exp-card')).map(card => {
+    const likeBtn = card.querySelector('.exp-like-btn');
+    if (likeBtn) {
+      likeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = likeBtn.dataset.likeId;
+        if (likedRecipes.has(id)) {
+          likedRecipes.delete(id);
+          likeBtn.classList.remove('liked');
+        } else {
+          likedRecipes.add(id);
+          likeBtn.classList.add('liked');
+          showToast('Added to Favorites ❤️');
+        }
+        localStorage.setItem('platePaletteLikes', JSON.stringify([...likedRecipes]));
+      });
+    }
+
     card.addEventListener('click', () => {
       const id = parseInt(card.dataset.id);
       window.location.href = `recipe.html?id=${id}`;
@@ -194,35 +230,14 @@ document.getElementById('expModalOverlay').addEventListener('click', e => {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-document.querySelectorAll('.cat-item').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.cat-item').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeMeal = btn.dataset.meal;
-    renderFilterGrid();
-  });
-});
+document.getElementById('globalSearch') && document.getElementById('globalSearch').addEventListener('input', e => handleSearch(e.target.value));
+document.getElementById('heroSearch') && document.getElementById('heroSearch').addEventListener('input', e => handleSearch(e.target.value));
 
-document.querySelectorAll('.exp-view-all-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    activeMeal = btn.dataset.meal;
-    document.querySelectorAll('.cat-item').forEach(b => {
-      b.classList.toggle('active', b.dataset.meal === activeMeal);
-    });
-    renderFilterGrid();
-  });
-});
-
-document.getElementById('globalSearch').addEventListener('input', e => handleSearch(e.target.value));
-document.getElementById('heroSearch').addEventListener('input', e => handleSearch(e.target.value));
-
-document.getElementById('clearSearchBtn').addEventListener('click', () => {
+document.getElementById('clearSearchBtn') && document.getElementById('clearSearchBtn').addEventListener('click', () => {
   handleSearch('');
 });
 
-
-
-document.getElementById('goProBtn').addEventListener('click', () => {
+document.getElementById('goProBtn') && document.getElementById('goProBtn').addEventListener('click', () => {
   showToast('Opening Pro plans... 💎');
 });
 
@@ -235,6 +250,60 @@ document.getElementById('newsletterForm').addEventListener('submit', e => {
 window.addEventListener('scroll', () => {
   document.getElementById('navbar') && document.querySelector('.navbar')
     .classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+if (themeToggleBtn) {
+  const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+  const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+  
+  const savedTheme = localStorage.getItem('platePaletteTheme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    moonIcon.classList.add('hidden');
+    sunIcon.classList.remove('hidden');
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('platePaletteTheme', isDark ? 'dark' : 'light');
+    if (isDark) {
+      moonIcon.classList.add('hidden');
+      sunIcon.classList.remove('hidden');
+    } else {
+      moonIcon.classList.remove('hidden');
+      sunIcon.classList.add('hidden');
+    }
+  });
+}
+
+const sortSelect = document.getElementById('sortSelect');
+if (sortSelect) {
+  sortSelect.addEventListener('change', (e) => {
+    sortState = e.target.value;
+    renderFilterGrid();
+  });
+}
+
+// Map instead of forEach for arrays
+Array.from(document.querySelectorAll('.cat-item')).map(btn => {
+  btn.addEventListener('click', () => {
+    Array.from(document.querySelectorAll('.cat-item')).map(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeMeal = btn.dataset.meal;
+    renderFilterGrid();
+  });
+});
+
+Array.from(document.querySelectorAll('.exp-view-all-btn')).map(btn => {
+  btn.addEventListener('click', () => {
+    activeMeal = btn.dataset.meal;
+    Array.from(document.querySelectorAll('.cat-item')).map(b => {
+      b.classList.toggle('active', b.dataset.meal === activeMeal);
+    });
+    renderFilterGrid();
+  });
 });
 
 fetchRecipes();
