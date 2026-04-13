@@ -252,31 +252,6 @@ window.addEventListener('scroll', () => {
     .classList.toggle('scrolled', window.scrollY > 60);
 });
 
-const themeToggleBtn = document.getElementById('themeToggleBtn');
-if (themeToggleBtn) {
-  const moonIcon = themeToggleBtn.querySelector('.moon-icon');
-  const sunIcon = themeToggleBtn.querySelector('.sun-icon');
-  
-  const savedTheme = localStorage.getItem('platePaletteTheme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-    moonIcon.classList.add('hidden');
-    sunIcon.classList.remove('hidden');
-  }
-
-  themeToggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem('platePaletteTheme', isDark ? 'dark' : 'light');
-    if (isDark) {
-      moonIcon.classList.add('hidden');
-      sunIcon.classList.remove('hidden');
-    } else {
-      moonIcon.classList.remove('hidden');
-      sunIcon.classList.add('hidden');
-    }
-  });
-}
 
 const sortSelect = document.getElementById('sortSelect');
 if (sortSelect) {

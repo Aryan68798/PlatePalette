@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -30,9 +31,17 @@ body, html {
 }
 
 @keyframes flip {
-  0% { transform: scaleX(1) rotate(0deg); }
-  50% { transform: scaleX(-1) rotate(180deg); }
-  100% { transform: scaleX(1) rotate(360deg); }
+  0% {
+    transform: scaleX(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scaleX(-1) rotate(180deg);
+  }
+
+  100% {
+    transform: scaleX(1) rotate(360deg);
+  }
 }
 
 .cooking-text {
